@@ -42,4 +42,24 @@ describe('DisjointSet', function() {
       expect(set.find(0)).to.not.eql(set.find(3));
     });
   });
+
+  describe('max weight example', function() {
+    var set = new DisjointSet(6, function(s1, s2, edge) {
+      return {
+        maxWeight: Math.max(s1.maxWeight, s2.maxWeight, edge.weight)
+      };
+    }, { maxWeight: 0 });
+
+    before(function() {
+      set.union(0, 1, { weight: 2 });
+      set.union(1, 2, { weight: 4 });
+      set.union(3, 4, { weight: 6 });
+    });
+
+    it('should calculate max weight of subset', function() {
+      expect(set.subsetProps(0).maxWeight).to.eql(4);
+      expect(set.subsetProps(3).maxWeight).to.eql(6);
+      expect(set.subsetProps(5).maxWeight).to.eql(0);
+    });
+  });
 });
