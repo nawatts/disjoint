@@ -1,5 +1,5 @@
 disjoint.js
-test
+disjoint.spec.js
 .babelrc
 .editorconfig
 .eslintrc
