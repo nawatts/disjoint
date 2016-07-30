@@ -29,17 +29,17 @@ describe('DisjointSet', function() {
     });
 
     it('should group elements correctly', function() {
-      expect(set.find(0)).to.eql(set.find(1));
-      expect(set.find(0)).to.eql(set.find(2));
-      expect(set.find(0)).to.eql(set.find(5));
-      expect(set.find(0)).to.eql(set.find(6));
-      expect(set.find(0)).to.eql(set.find(7));
+      expect(set.isConnected(0, 1)).to.be.true;
+      expect(set.isConnected(0, 2)).to.be.true;
+      expect(set.isConnected(0, 5)).to.be.true;
+      expect(set.isConnected(0, 6)).to.be.true;
+      expect(set.isConnected(0, 7)).to.be.true;
 
-      expect(set.find(3)).to.eql(set.find(4));
-      expect(set.find(3)).to.eql(set.find(8));
-      expect(set.find(3)).to.eql(set.find(9));
+      expect(set.isConnected(3, 4)).to.be.true;
+      expect(set.isConnected(3, 8)).to.be.true;
+      expect(set.isConnected(3, 9)).to.be.true;
 
-      expect(set.find(0)).to.not.eql(set.find(3));
+      expect(set.isConnected(0, 3)).to.be.false;
     });
   });
 

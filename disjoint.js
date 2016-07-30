@@ -21,6 +21,11 @@ DisjointSet.prototype.find = function(x) {
   return this._parent[x];
 }
 
+DisjointSet.prototype.isConnected = function(x, y) {
+  // Are elements x and y in the same subset?
+  return this.find(x) === this.find(y);
+}
+
 DisjointSet.prototype.union = function(x, y, edge) {
   // Union the two subsets containing elements x and y
   const xRoot = this.find(x);
