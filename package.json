@@ -1,6 +1,6 @@
 {
   "name": "disjoint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Nick Watts",
     "email": "nick@nawatts.com"
@@ -9,9 +9,10 @@
   "main": "lib/disjoint.js",
   "scripts": {
     "build": "mkdirp lib && babel disjoint.js > lib/disjoint.js",
-    "build:dist": "mkdirp lib && NODE_ENV=production babel disjoint.js | uglifyjs --compress --mangle --mangle-props - > lib/disjoint.js",
+    "build:dist": "mkdirp lib && babel disjoint.js | uglifyjs --compress --mangle --mangle-props - > lib/disjoint.js",
     "test": "mocha disjoint.spec.js",
     "pretest": "npm run build",
+    "prepublish": "npm run build:dist",
     "lint": "eslint *.js",
     "clean": "rimraf lib"
   },
