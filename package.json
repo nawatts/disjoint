@@ -1,0 +1,33 @@
+{
+  "name": "disjoint",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nick Watts",
+    "email": "nick@nawatts.com"
+  },
+  "license": "MIT",
+  "main": "lib/disjoint.js",
+  "scripts": {
+    "build": "mkdirp lib && babel disjoint.js > lib/disjoint.js",
+    "build:dist": "mkdirp lib && NODE_ENV=production babel disjoint.js | uglifyjs --compress --mangle --mangle-props - > lib/disjoint.js",
+    "test": "mocha disjoint.spec.js",
+    "pretest": "npm run build",
+    "lint": "eslint *.js",
+    "clean": "rimraf lib"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.11.4",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.12.0",
+    "babel-preset-es2015": "^6.9.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.2.0",
+    "eslint-plugin-import": "^1.12.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^2.5.3",
+    "rimraf": "^2.5.4",
+    "uglify-js": "^2.7.0"
+  }
+}
