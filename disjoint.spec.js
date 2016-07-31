@@ -40,6 +40,11 @@ describe('DisjointSet', function() {
       expect(set.isConnected(3, 9)).to.be.true;
 
       expect(set.isConnected(0, 3)).to.be.false;
+
+      expect(set.subsets()).to.eql([
+        [0, 1, 2, 5, 6, 7],
+        [3, 4, 8, 9]
+      ]);
     });
   });
 
