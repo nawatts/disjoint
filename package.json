@@ -1,11 +1,18 @@
 {
   "name": "disjoint",
   "version": "1.0.1",
+  "description": "Implementation of a disjoint set data structure",
   "author": {
     "name": "Nick Watts",
     "email": "nick@nawatts.com"
   },
   "license": "MIT",
+  "keywords": [
+    "disjoint-set",
+    "union-find",
+    "data-structure",
+    "algorithm"
+  ],
   "main": "lib/disjoint.js",
   "scripts": {
     "build": "mkdirp lib && babel disjoint.js > lib/disjoint.js",
