@@ -1,6 +1,6 @@
 {
   "name": "disjoint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Implementation of a disjoint set data structure",
   "author": {
     "name": "Nick Watts",
