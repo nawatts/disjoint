@@ -7,6 +7,12 @@
     "email": "nick@nawatts.com"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nawatts/disjoint.git"
+  },
+  "homepage": "https://github.com/nawatts/disjoint",
+  "bugs": "https://github.com/nawatts/disjoint/issues",
   "keywords": [
     "disjoint-set",
     "union-find",
