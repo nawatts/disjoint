@@ -1,3 +1,12 @@
+/**
+ * Create a [disjoint set]{@link https://en.wikipedia.org/wiki/Disjoint-set_data_structure}.
+ * @constructor
+ * @param {Number} size - The number of elements in the set
+ * @param {SubsetPropsReducer} subsetPropsReducer - Defines how subset properties are combined when two subsets
+ * are merged as the result of a union.
+ * @param {(Object|SubsetPropsInitializer)} defaultProps - Initial subset properties or a callback that returns
+ * initial subset properties.
+ */
 function DisjointSet(size, subsetPropsReducer, defaultProps) {
   this._parent = new Array(size);
   this._rank = new Array(size);
@@ -20,21 +29,54 @@ function DisjointSet(size, subsetPropsReducer, defaultProps) {
   }
 }
 
+/**
+ * Defines how subset properties are combined when two subsets are merged as the result of a union.
+ * @callback SubsetPropsReducer
+ * @param {Object} s1 - Properties of a subset.
+ * @param {Object} s2 - Properties of a subset.
+ * @param {Object} edgeProps - Properties of the edge that will join sets s1 and s2.
+ * @returns {Object} Properties of the merged subset.
+ */
+
+/**
+ * Defines initial properties for a subset. Initially, a set with n elements will contain n subsets, each
+ * containing a single element.
+ * @callback SubsetPropsInitializer
+ * @param {Number} i - The element the initial subset will contain.
+ * @returns {Object} Properties of the initial subset containing element i.
+ */
+
+/**
+ * Find the root of the subset containing element x.
+ * @param {Number} x - An element in the set.
+ * @returns {Number} The root of the subset containing element x.
+ */
 DisjointSet.prototype.find = function(x) {
-  // Find the subset that element x belongs to
   if (this._parent[x] !== x) {
     this._parent[x] = this.find(this._parent[x]);
   }
   return this._parent[x];
 }
 
+/**
+ * Determine if two elements are connected.
+ * @param {Number} x - An element in the set.
+ * @param {Number} y - An element in the set.
+ * @returns {Boolean} True if elements x and y are connected (in the same subset).
+ */
 DisjointSet.prototype.isConnected = function(x, y) {
-  // Are elements x and y in the same subset?
   return this.find(x) === this.find(y);
 }
 
+/**
+ * Connect two elements and merge their subsets.
+ * @param {Number} x - An element in the set.
+ * @param {Number} y - An element in the set.
+ * @param {Object} edge - Arbitrary properties of the edge connecting elements x and y. These are passed to the set's
+ * {@link SubsetPropsReducer} to determine properties of the merged subset.
+ * @returns {Number} The root of the merged subset.
+ */
 DisjointSet.prototype.union = function(x, y, edge) {
-  // Union the two subsets containing elements x and y
   const xRoot = this.find(x);
   const yRoot = this.find(y);
 
@@ -64,8 +106,11 @@ DisjointSet.prototype.union = function(x, y, edge) {
   }
 }
 
+/**
+ * Get all subsets in the set.
+ * @returns {Number[][]} An array of subsets. Each subset is an array of elements contained in that subset.
+ */
 DisjointSet.prototype.subsets = function() {
-  // Get subsets as arrays of elements
   const subsets = {}
   for (let i = 0; i < this._parent.length; i++) {
     const root = this.find(i);
@@ -81,8 +126,12 @@ DisjointSet.prototype.subsets = function() {
     .sort((s1, s2) => s1[0] - s2[0]);
 }
 
+/**
+ * Get the subset containing an element.
+ * @param {Number} x - An element in the set.
+ * @returns {Number[]} Array of elements in the subset containing element x.
+ */
 DisjointSet.prototype.subset = function(x) {
-  // Get the subset containing element x
   const subsetRoot = this.find(x);
   const subset = [];
   for (let i = 0; i < this._parent.length; i++) {
@@ -94,13 +143,20 @@ DisjointSet.prototype.subset = function(x) {
   return subset;
 }
 
+/**
+ * Get the number of subsets in the set.
+ * @returns {Number} Number of subsets in the set.
+ */
 DisjointSet.prototype.numSubsets = function() {
-  // Get number of subsets in the set
   return this._numSubsets;
 }
 
+/**
+ * Get the properties of the subset containing a specific element.
+ * @param {Number} x - An element in the set.
+ * @returns {Object} - The properties of the subset containing element x.
+ */
 DisjointSet.prototype.subsetProps = function(x) {
-  // Get properties of subset containing element x
   return this._subsetProps[this.find(x)];
 }
 
