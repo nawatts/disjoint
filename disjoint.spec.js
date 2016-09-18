@@ -46,6 +46,11 @@ describe('DisjointSet', function() {
         [3, 4, 8, 9]
       ]);
     });
+
+    it('should identify the subset containing a particular element', function() {
+      expect(set.subset(2)).to.eql([0, 1, 2, 5, 6, 7]);
+      expect(set.subset(8)).to.eql([3, 4, 8, 9]);
+    });
   });
 
   describe('max weight example', function() {

@@ -74,6 +74,19 @@ DisjointSet.prototype.subsets = function() {
     .sort((s1, s2) => s1[0] - s2[0]);
 }
 
+DisjointSet.prototype.subset = function(x) {
+  // Get the subset containing element x
+  const subsetRoot = this.find(x);
+  const subset = [];
+  for (let i = 0; i < this._parent.length; i++) {
+    if (this.find(i) === subsetRoot) {
+      subset.push(i);
+    }
+  }
+  subset.sort();
+  return subset;
+}
+
 DisjointSet.prototype.numSubsets = function() {
   // Get number of subsets in the set
   return this._numSubsets;
