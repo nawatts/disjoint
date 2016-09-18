@@ -72,4 +72,22 @@ describe('DisjointSet', function() {
       expect(set.subsetProps(5).maxWeight).to.eql(0);
     });
   });
+
+  describe('subset properties initialization', function() {
+
+    it('should initialize using an object', function() {
+      var set = new DisjointSet(5, null, { prop: 1 });
+
+      expect(set.subsetProps(1)).to.eql({ prop: 1 });
+      expect(set.subsetProps(3)).to.eql({ prop: 1 });
+    });
+
+    it('should initialize using a function', function() {
+      var set = new DisjointSet(6, null, function(i) { return { prop: i }; });
+
+      expect(set.subsetProps(1)).to.eql({ prop: 1 });
+      expect(set.subsetProps(3)).to.eql({ prop: 3 });
+    });
+
+  })
 });

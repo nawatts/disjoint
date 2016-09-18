@@ -6,10 +6,17 @@ function DisjointSet(size, subsetPropsReducer, defaultProps) {
   this._subsetProps = new Array(size);
   this._subsetPropsReducer = subsetPropsReducer;
 
+  let initializer;
+  if (Object.prototype.toString.call(defaultProps) == '[object Function]') {
+    initializer = defaultProps;
+  } else {
+    initializer = () => defaultProps;
+  }
+
   for (let i = 0; i < size; i++) {
     this._parent[i] = i;
     this._rank[i] = 0;
-    this._subsetProps[i] = Object.assign({}, defaultProps);
+    this._subsetProps[i] = Object.assign({}, initializer(i));
   }
 }
 
