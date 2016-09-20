@@ -4,6 +4,8 @@ Implementation of a [disjoint set](https://en.wikipedia.org/wiki/Disjoint-set_da
 
 Supports tracking arbitrary information about each subset and updating it as new links are added.
 
+[![npm version](https://img.shields.io/npm/v/disjoint.svg)](https://www.npmjs.com/package/disjoint)
+
 ```JavaScript
 // Example: 6 elements connected with weighted edges
 // Edge weights are in parentheses
