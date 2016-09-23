@@ -2,9 +2,9 @@
  * Create a [disjoint set]{@link https://en.wikipedia.org/wiki/Disjoint-set_data_structure}.
  * @constructor
  * @param {Number} size - The number of elements in the set
- * @param {SubsetPropsReducer} subsetPropsReducer - Defines how subset properties are combined when two subsets
+ * @param {SubsetPropsReducer} [subsetPropsReducer] - Defines how subset properties are combined when two subsets
  * are merged as the result of a union.
- * @param {(Object|SubsetPropsInitializer)} defaultProps - Initial subset properties or a callback that returns
+ * @param {(Object|SubsetPropsInitializer)} [defaultProps={}] - Initial subset properties or a callback that returns
  * initial subset properties.
  */
 function DisjointSet(size, subsetPropsReducer, defaultProps) {
@@ -72,7 +72,7 @@ DisjointSet.prototype.isConnected = function(x, y) {
  * Connect two elements and merge their subsets.
  * @param {Number} x - An element in the set.
  * @param {Number} y - An element in the set.
- * @param {Object} edge - Arbitrary properties of the edge connecting elements x and y. These are passed to the set's
+ * @param {Object} [edge] - Arbitrary properties of the edge connecting elements x and y. These are passed to the set's
  * {@link SubsetPropsReducer} to determine properties of the merged subset.
  * @returns {Number} The root of the merged subset.
  */
