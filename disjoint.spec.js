@@ -89,5 +89,45 @@ describe('DisjointSet', function() {
       expect(set.subsetProps(3)).to.eql({ prop: 3 });
     });
 
-  })
+  });
+
+  describe('without a subset properties reducer', function() {
+    it('should group elements correctly', function() {
+      const set = new DisjointSet(5);
+
+      expect(set.union.bind(set, 0, 1)).to.not.throw(Error);
+      expect(set.union.bind(set, 0, 3)).to.not.throw(Error);
+      expect(set.union.bind(set, 2, 4)).to.not.throw(Error);
+
+      expect(set.isConnected(1, 3)).to.be.true;
+      expect(set.isConnected(2, 4)).to.be.true;
+      expect(set.isConnected(0, 2)).to.be.false;
+
+      expect(set.subset(0)).to.eql([0, 1, 3]);
+      expect(set.subset(4)).to.eql([2, 4]);
+    });
+
+    it('should have empty props for all subsets', function() {
+      const set = new DisjointSet(5);
+
+      expect(set.subsetProps(0)).to.eql({});
+      expect(set.union.bind(set, 1, 3, { w: 10 })).to.not.throw(Error);
+      expect(set.subsetProps(0)).to.eql({});
+    });
+  });
+
+  describe('without initial subset properties', function() {
+    it('should default to {}', function() {
+      const set = new DisjointSet(5, (s1, s2, e) => Object.assign({}, s1, s2, e));
+      expect(set.subsetProps(0)).to.eql({});
+    });
+
+    it('should reduce subset props', function() {
+      const set = new DisjointSet(5, (s1, s2, e) => Object.assign({}, s1, s2, e));
+      set.union(0, 1, { w: 10 });
+      set.union(0, 3, { u: 2 });
+      set.union(1, 4, { w: 5 });
+      expect(set.subsetProps(1)).to.eql({ u: 2, w: 5 });
+    });
+  });
 });
