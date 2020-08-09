@@ -18,6 +18,8 @@ Supports tracking arbitrary information about each subset and updating it as new
 //    3 -(1)- 4       5
 //
 
+const { DisjointSet } = require('disjoint');
+
 const set = new DisjointSet(
   6, // Size of disjoint set
   function(s1, s2, edge) {

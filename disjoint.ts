@@ -186,4 +186,5 @@ class DisjointSet<
   }
 }
 
-export = DisjointSet;
+export { DisjointSet };
+export default DisjointSet;

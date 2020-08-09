@@ -1,7 +1,7 @@
 import chai = require("chai");
 const expect = chai.expect;
 
-import DisjointSet = require(".");
+import DisjointSet from ".";
 
 describe("DisjointSet", function () {
   describe("case 1", function () {
